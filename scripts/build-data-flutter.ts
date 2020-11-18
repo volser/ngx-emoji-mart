@@ -184,7 +184,7 @@ categories.unshift(smileysAndPeople);
 categories.splice(1, 2);
 
 const doc = `//Do't change (automatically generated)
-import 'base_emoji2.dart';
+import 'base_emoji.dart';
 
 const emojiList = <Emoji>[
 ${emojis
