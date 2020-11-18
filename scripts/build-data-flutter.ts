@@ -183,14 +183,26 @@ const smileysAndPeople = {
 categories.unshift(smileysAndPeople);
 categories.splice(1, 2);
 
+const flutterEmojis: any[] = [];
+categories.forEach(cat => {
+  cat.emojis.forEach((unified: any) => {
+    const emoji = emojis.find(em => em.unified === unified);
+    if (emoji) {
+      flutterEmojis.push({
+        ...emoji,
+        cat,
+      });
+    }
+  });
+});
+
 const doc = `//Do't change (automatically generated)
 import 'base_emoji.dart';
 
 const emojiList = <Emoji>[
-${emojis
+${flutterEmojis
   .map(e => {
-    const cat = categories.find(c => c.emojis.includes(e.unified)) || categories[0];
-    let catId = cat != null ? cat.id : 'people';
+    let catId = e.cat.id;
     if (catId === 'foods') {
       catId = 'food';
     }
